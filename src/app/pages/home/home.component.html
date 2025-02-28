@@ -1,0 +1,12 @@
+<div class="home-container">
+  <h2>Welcome to the Online Shop</h2>
+
+  <div class="product-grid">
+    <div class="product-card" *ngFor="let product of products">
+
+      <h3>{{ product.name }}</h3>
+      <p>Price: ${{ product.price }}</p>
+      <button (click)="viewProduct(product.id)">View Details</button>
+    </div>
+  </div>
+</div>

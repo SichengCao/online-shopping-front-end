@@ -1,0 +1,37 @@
+<div class="register-container">
+  <mat-card class="register-card">
+    <mat-card-title>REGISTER</mat-card-title>
+    <mat-card-content>
+      <form #registerForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" [(ngModel)]="username" name="username" required placeholder="Enter Username">
+          <mat-error *ngIf="registerForm.submitted && !username">Username is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" required placeholder="Enter Email">
+          <mat-error *ngIf="registerForm.submitted && !email">Email is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="password" name="password" required placeholder="Enter Password">
+          <mat-error *ngIf="registerForm.submitted && !password">Password is required</mat-error>
+        </mat-form-field>
+
+        <!-- 选择是否是卖家 -->
+        <mat-checkbox [(ngModel)]="isSeller" name="isSeller">I am a Seller</mat-checkbox>
+
+        <button mat-raised-button color="primary" class="full-width" (click)="register()" [disabled]="loading">
+          {{ loading ? 'Registering...' : 'Register' }}
+        </button>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <a routerLink="/login" mat-button>Already have an account? Login</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
