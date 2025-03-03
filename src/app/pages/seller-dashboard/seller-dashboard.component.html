@@ -1,1 +1,76 @@
-<p>seller-dashboard works!</p>
+<div class="dashboard-container">
+  <mat-card class="dashboard-card">
+    <mat-card-title>Seller Dashboard</mat-card-title>
+    <mat-card-content>
+      <div class="dashboard-section">
+        <h3>Order Summary</h3>
+        <table mat-table [dataSource]="orders" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Order ID </th>
+            <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customer">
+            <th mat-header-cell *matHeaderCellDef> Customer </th>
+            <td mat-cell *matCellDef="let order"> {{order.customer}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let order"> {{order.status}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let order">
+              <button mat-button color="primary" (click)="viewOrder(order.id)">View</button>
+              <button mat-button color="accent" *ngIf="order.status === 'Processing'" (click)="completeOrder(order.id)">Complete</button>
+              <button mat-button color="warn" *ngIf="order.status === 'Processing'" (click)="cancelOrder(order.id)">Cancel</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <div class="dashboard-section">
+        <h3>Product Management</h3>
+        <button mat-raised-button color="primary" (click)="addProduct()">Add Product</button>
+        <table mat-table [dataSource]="products" class="mat-elevation-z8">
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Product Name </th>
+            <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Price </th>
+            <td mat-cell *matCellDef="let product"> {{product.retailPrice | currency}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef> Stock </th>
+            <td mat-cell *matCellDef="let product"> {{product.quantity}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let product">
+              <button mat-button color="accent" (click)="editProduct(product.id)">Edit</button>
+              <button mat-button color="warn" (click)="deleteProduct(product.id)">Delete</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="productColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: productColumns;"></tr>
+        </table>
+      </div>
+
+      <div class="dashboard-section">
+        <h3>Sales Statistics</h3>
+        <p>Most Profitable Product: <strong>{{ mostProfitableProduct }}</strong></p>
+        <p>Top-Selling Product: <strong>{{ topSellingProduct }}</strong></p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

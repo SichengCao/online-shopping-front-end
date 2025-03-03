@@ -32,11 +32,11 @@ export class LoginComponent {
 
     this.loading = true;
     this.authService.login({ username: this.username, password: this.password }).subscribe(
-      (response: { token: string; seller: boolean }) => {  // ✅ 明确 `response` 的类型
+      (response: { token: string; seller: boolean }) => {  //  明确 `response` 的类型
         console.log("🔥 后端返回的登录数据:", response);
 
-        const token = response.token;  // ✅ 现在不会报错
-        const isSeller = response.seller;  // ✅ 现在不会报错
+        const token = response.token;  //  现在不会报错
+        const isSeller = response.seller;  //  现在不会报错
 
         this.authService.saveUserData(token, isSeller);
         this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
@@ -48,7 +48,7 @@ export class LoginComponent {
         }
       },
       error => {
-        console.error("登录失败:", error);
+        console.error("login failed:", error);
         this.snackBar.open('Login failed! Check your credentials.', 'Close', { duration: 3000 });
         this.loading = false;
       }

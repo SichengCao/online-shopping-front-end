@@ -5,14 +5,14 @@
       <form #loginForm="ngForm">
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>UserName</mat-label>
-          <input matInput type="text" [(ngModel)]="username" name="username" required placeholder="输入用户名">
-          <mat-error *ngIf="loginForm.submitted && !username">用户名不能为空</mat-error>
+          <input matInput type="text" [(ngModel)]="username" name="username" required placeholder="please enter username">
+          <mat-error *ngIf="loginForm.submitted && !username">username cannot be empty</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Password</mat-label>
-          <input matInput type="password" [(ngModel)]="password" name="password" required placeholder="输入密码">
-          <mat-error *ngIf="loginForm.submitted && !password">密码不能为空</mat-error>
+          <input matInput type="password" [(ngModel)]="password" name="password" required placeholder="please enter password">
+          <mat-error *ngIf="loginForm.submitted && !password">username cannot be empty</mat-error>
         </mat-form-field>
 
         <button mat-raised-button color="primary" class="full-width" (click)="login()" [disabled]="loading">
